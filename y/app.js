@@ -70,8 +70,6 @@ const mobile = [
   },
 ];
 
-
-
 // *******************************
 // First Method (forEach, filter)
 // *******************************
@@ -110,46 +108,51 @@ const mobile = [
 //   });
 // }
 
-
-
 // **************************
 // Second Method (map, find)
 // **************************
-// let company = document.getElementById("company");
-// let model = document.getElementById("modle");
+let company = document.getElementById("company");
+let model = document.getElementById("modle");
 
-// let cname = mobile.map((value) => {
-//   return value.companyName;
-// });
+let image = document.querySelector(".image");
+let heading = document.querySelector(".heading");
+let card = document.querySelector(".card");
 
-// cname.forEach((value) => {
-//   let option = document.createElement("option");
-//   option.innerHTML = value;
-//   company.appendChild(option);
-// });
+let cname = mobile.map((value) => {
+  return value.companyName;
+});
 
-// company.addEventListener("change", () => {
-//   model.innerHTML = "";
-//   mobile.forEach((value) => {
-//     if (value.companyName === company.value) {
-//       model.disabled = false;
-//       value.models.forEach((value) => {
-//         let option = document.createElement("option");
-//         option.innerHTML = value.name;
-//         model.appendChild(option);
-//       });
-//     }
-//   });
-// });
+cname.forEach((value) => {
+  let option = document.createElement("option");
+  option.innerHTML = value;
+  company.appendChild(option);
+});
 
-// const data = () => {
-//   mobile.find((value) => {
-//     if (value.companyName === company.value) {
-//       value.models.find((value) => {
-//         if (value.name === model.value) {
-//           console.log(value.item);
-//         }
-//       });
-//     }
-//   });
-// };
+company.addEventListener("change", () => {
+  model.innerHTML = "";
+  mobile.forEach((value) => {
+    if (value.companyName === company.value) {
+      model.disabled = false;
+      value.models.forEach((value) => {
+        let option = document.createElement("option");
+        option.innerHTML = value.name;
+        model.appendChild(option);
+      });
+    }
+  });
+});
+
+const data = () => {
+  mobile.find((value) => {
+    if (value.companyName === company.value) {
+      value.models.find((value) => {
+        if (value.name === model.value) {
+          card.style.transform = "scale(1)";
+          console.log(value.item);
+          image.src = value.item[0];
+          heading.innerHTML = value.item[1];
+        }
+      });
+    }
+  });
+};
